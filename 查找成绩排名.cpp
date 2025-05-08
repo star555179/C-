@@ -1,3 +1,4 @@
+//C++å¤§ä½œä¸šä¿„ç½—æ–¯æ–¹å—
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -27,33 +28,33 @@ int block16[4][4] = { { 26,0,0,0 },{ 0,0,0,0 },{ 1,1,0,0 },{ 0,1,1,0 } };
 int block17[4][4] = { { 27,0,0,0 },{ 0,0,1,0 },{ 0,1,1,0 },{ 0,1,0,0 } };
 int block18[4][4] = { { 28,0,0,0 },{ 0,0,0,0 },{ 1,1,0,0 },{ 1,1,0,0 } };
 
-void initialWindow(HANDLE hOut);//³õÊ¼»¯´°¿Ú
-void initialPrint(HANDLE hOut);//³õÊ¼»¯½çÃæ
-void gotoXY(HANDLE hOut, int x, int y);//ÒÆ¶¯¹â±ê
-void roundBlock(HANDLE hOut, int block[4][4]);//Ëæ»úÉú³É·½¿é²¢´òÓ¡µ½ÏÂÒ»¸ö·½¿éÎ»ÖÃ
-bool collisionDetection(int block[4][4], int map[21][12], int x, int y);//¼ì²âÅö×²
-void printBlock(HANDLE hOut, int block[4][4], int x, int y);//´òÓ¡·½¿é
-void clearBlock(HANDLE hOut, int block[4][4], int x, int y);//Ïû³ı·½¿é
-void myLeft(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//×óÒÆ
-void myRight(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//ÓÒÒÆ
-void myUp(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//Ë³Ê±ÕëĞı×ª90¶È
-int myDown(HANDLE hOut, int block[4][4], int map[21][12], int &x, int y);//¼ÓËÙÏÂÂä
-void myStop(HANDLE hOut, int block[4][4]);//ÓÎÏ·ÔİÍ£
-void gameOver(HANDLE hOut, int block[4][4], int map[21][12]);//ÓÎÏ·½áÊø
-void eliminateRow(HANDLE hOut, int map[21][12], int &val, int &fraction, int &checkpoint);//ÅĞ¶ÏÊÇ·ñÄÜÏûĞĞ²¢¸üĞÂ·ÖÖµ
+void initialWindow(HANDLE hOut);//åˆå§‹åŒ–çª—å£
+void initialPrint(HANDLE hOut);//åˆå§‹åŒ–ç•Œé¢
+void gotoXY(HANDLE hOut, int x, int y);//ç§»åŠ¨å…‰æ ‡
+void roundBlock(HANDLE hOut, int block[4][4]);//éšæœºç”Ÿæˆæ–¹å—å¹¶æ‰“å°åˆ°ä¸‹ä¸€ä¸ªæ–¹å—ä½ç½®
+bool collisionDetection(int block[4][4], int map[21][12], int x, int y);//æ£€æµ‹ç¢°æ’
+void printBlock(HANDLE hOut, int block[4][4], int x, int y);//æ‰“å°æ–¹å—
+void clearBlock(HANDLE hOut, int block[4][4], int x, int y);//æ¶ˆé™¤æ–¹å—
+void myLeft(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//å·¦ç§»
+void myRight(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//å³ç§»
+void myUp(HANDLE hOut, int block[4][4], int map[21][12], int x, int &y);//é¡ºæ—¶é’ˆæ—‹è½¬90åº¦
+int myDown(HANDLE hOut, int block[4][4], int map[21][12], int &x, int y);//åŠ é€Ÿä¸‹è½
+void myStop(HANDLE hOut, int block[4][4]);//æ¸¸æˆæš‚åœ
+void gameOver(HANDLE hOut, int block[4][4], int map[21][12]);//æ¸¸æˆç»“æŸ
+void eliminateRow(HANDLE hOut, int map[21][12], int &val, int &fraction, int &checkpoint);//åˆ¤æ–­æ˜¯å¦èƒ½æ¶ˆè¡Œå¹¶æ›´æ–°åˆ†å€¼
 int main()
 {
     int map[21][12];
-    int blockA[4][4];//ºòÑ¡ÇøµÄ·½¿é
-    int blockB[4][4];//ÏÂÂäÖĞµÄ·½¿é
-    int positionX, positionY;//·½¿é×óÉÏ½ÇµÄ×ø±ê
-    bool check;//¼ì²é·½¿é»¹ÄÜ²»ÄÜÏÂÂä
-    char key;//ÓÃÀ´´æ´¢°´¼ü
-    int val;//ÓÃÀ´¿ØÖÆÏÂÂäËÙ¶È
-    int fraction;//ÓÃÀ´´æ´¢µÃ·Ö
-    int checkpoint;//ÓÃÀ´´æ´¢¹Ø¿¨
+    int blockA[4][4];//å€™é€‰åŒºçš„æ–¹å—
+    int blockB[4][4];//ä¸‹è½ä¸­çš„æ–¹å—
+    int positionX, positionY;//æ–¹å—å·¦ä¸Šè§’çš„åæ ‡
+    bool check;//æ£€æŸ¥æ–¹å—è¿˜èƒ½ä¸èƒ½ä¸‹è½
+    char key;//ç”¨æ¥å­˜å‚¨æŒ‰é”®
+    int val;//ç”¨æ¥æ§åˆ¶ä¸‹è½é€Ÿåº¦
+    int fraction;//ç”¨æ¥å­˜å‚¨å¾—åˆ†
+    int checkpoint;//ç”¨æ¥å­˜å‚¨å…³å¡
     int times;
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);//»ñÈ¡±ê×¼Êä³öÉè±¸¾ä±ú
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);//è·å–æ ‡å‡†è¾“å‡ºè®¾å¤‡å¥æŸ„
     initialWindow(hOut);
 initial:
     gotoXY(hOut, 0, 0);
@@ -172,7 +173,7 @@ initial:
 
 void initialWindow(HANDLE hOut)
 {
-    SetConsoleTitle("¶íÂŞË¹·½¿é");
+    SetConsoleTitle("ä¿„ç½—æ–¯æ–¹å—");
     COORD size = { 80, 25 };
     SetConsoleScreenBufferSize(hOut, size);
     SMALL_RECT rc = { 0, 0, 79, 24 };
@@ -186,32 +187,32 @@ void initialPrint(HANDLE hOut)
     SetConsoleTextAttribute(hOut, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
     for (int i = 0; i < 20; ++i)
     {
-        cout << "¡ö                    ¡ö¡î                      ¡î" << endl;
+        cout << "â–                     â– â˜†                      â˜†" << endl;
     }
     gotoXY(hOut, 26, 0);
-    cout << "¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î";
+    cout << "â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†";
     gotoXY(hOut, 0, 20);
-    cout << "¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡ö¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î¡î";
+    cout << "â– â– â– â– â– â– â– â– â– â– â– â– â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†â˜†";
     gotoXY(hOut, 26, 1);
-    cout << "·Ö    Êı£º      ";
+    cout << "åˆ†    æ•°ï¼š      ";
     gotoXY(hOut, 26, 2);
-    cout << "¹Ø    ¿¨£º      ";
+    cout << "å…³    å¡ï¼š      ";
     gotoXY(hOut, 26, 4);
-    cout << "ÏÂÒ»·½¿é£º";
+    cout << "ä¸‹ä¸€æ–¹å—ï¼š";
     gotoXY(hOut, 26, 9);
-    cout << "²Ù×÷·½·¨£º";
+    cout << "æ“ä½œæ–¹æ³•ï¼š";
     gotoXY(hOut, 30, 11);
-    cout << "¡ü£ºĞı×ª ¡ı£ºËÙ½µ";
+    cout << "â†‘ï¼šæ—‹è½¬ â†“ï¼šé€Ÿé™";
     gotoXY(hOut, 30, 12);
-    cout << "¡ú£ºÓÒÒÆ ¡û£º×óÒÆ";
+    cout << "â†’ï¼šå³ç§» â†ï¼šå·¦ç§»";
     gotoXY(hOut, 30, 13);
-    cout << "¿Õ¸ñ¼ü£º¿ªÊ¼/ÔİÍ£";
+    cout << "ç©ºæ ¼é”®ï¼šå¼€å§‹/æš‚åœ";
     gotoXY(hOut, 30, 14);
-    cout << "Esc ¼ü£ºÍË³ö";
+    cout << "Esc é”®ï¼šé€€å‡º";
     gotoXY(hOut, 26, 16);
-    cout << "¹Ø    ÓÚ£º";
+    cout << "å…³    äºï¼š";
     gotoXY(hOut, 30, 18);
-    cout << "¶íÂŞË¹·½¿éV1.0";
+    cout << "ä¿„ç½—æ–¯æ–¹å—V1.0";
   
 }
 
@@ -470,7 +471,7 @@ void printBlock(HANDLE hOut, int block[4][4], int x, int y)
                 {
 
                     gotoXY(hOut, 2 * (y + j), x + i);
-                    cout << "¡ö";
+                    cout << "â– ";
                 }
             }
         }
@@ -501,9 +502,9 @@ void gameOver(HANDLE hOut, int block[4][4], int map[21][12])
     gotoXY(hOut, 9, 8);
     cout << "GAME OVER";
     gotoXY(hOut, 8, 9);
-    cout << "¿Õ¸ñ¼ü£ºÖØÀ´";
+    cout << "ç©ºæ ¼é”®ï¼šé‡æ¥";
     gotoXY(hOut, 8, 10);
-    cout << "ESC¼ü£ºÍË³ö";
+    cout << "ESCé”®ï¼šé€€å‡º";
     char key;
     while (true)
     {
@@ -540,7 +541,7 @@ int myDown(HANDLE hOut, int block[4][4], int map[21][12], int &x, int y)
                 map[x + i][y + j] = 1;
                 SetConsoleTextAttribute(hOut, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
                 gotoXY(hOut, 2 * (y + j), x + i);
-                cout << "¡ö";
+                cout << "â– ";
             }
         }
     }
@@ -1246,7 +1247,7 @@ void myStop(HANDLE hOut, int block[4][4])
     clearBlock(hOut, block, 5, 15);
     SetConsoleTextAttribute(hOut, FOREGROUND_RED | FOREGROUND_INTENSITY);
     gotoXY(hOut, 30, 7);
-    cout << "ÓÎÏ·ÔİÍ£";
+    cout << "æ¸¸æˆæš‚åœ";
     char key;
     while (true)
     {
@@ -1291,7 +1292,7 @@ void eliminateRow(HANDLE hOut, int map[21][12], int &val, int &fraction, int &ch
                     gotoXY(hOut, 2 * n, m);
                     if (map[m][n] == 1)
                     {
-                        cout << "¡ö";
+                        cout << "â– ";
                     }
                     else
                     {
